@@ -10,14 +10,14 @@ conf = ConnectionConfig(
     MAIL_FROM = os.getenv("GMAIL_USERNAME"),
     MAIL_PORT = 587,
     MAIL_SERVER = "smtp.gmail.com",
-    MAIL_FROM_NAME="FixIt-AI",
+    MAIL_FROM_NAME="fiXitAI",
     MAIL_STARTTLS = True,
     MAIL_SSL_TLS = False,
     USE_CREDENTIALS = True,
     VALIDATE_CERTS = True
 )
 
-async def send_with_template(token:str):
+async def send_with_template(token:str,email:str):
 
     html = f"""<!DOCTYPE html>
         <html>
@@ -86,7 +86,7 @@ async def send_with_template(token:str):
                     <a style={{color:"white"}} href="http://127.0.0.1:8000/verify?token={ token }" class="button">Verify Account</a>
                     <p>If you did not create an account, no further action is required.</p>
                     <p>Best regards,</p>
-                    <p>Fixit AI</p>
+                    <p>fiXitAI</p>
                 </div>
                 <div class="footer">
                     <p>&copy; 2024 Your Company Name. All rights reserved.</p>
@@ -97,7 +97,7 @@ async def send_with_template(token:str):
         """
     message = MessageSchema(
         subject="Verify your identity",
-        recipients=["mohitarora00777@gmail.com"],
+        recipients=[email],
         body=html,
         subtype=MessageType.html,
         )

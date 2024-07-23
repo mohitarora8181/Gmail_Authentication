@@ -6,6 +6,7 @@ from typing import Dict
 from jose import jwt,JWTError
 from pymongo import MongoClient
 from sendMail import send_with_template
+from fastapi.middleware.cors import CORSMiddleware
 
 import os
 
@@ -16,6 +17,14 @@ db = client["users"].verifyData
 
 
 app = FastAPI()
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.post("/login")
 def login(email:str,response:Response):
@@ -54,8 +63,8 @@ def start(data:Dict):
 
     
 @app.post("/sendMail")
-async def sendMail(token:str):
-    await send_with_template(token)
+async def sendMail(token:str,email:str):
+    await send_with_template(token,email)
     return True
 
 
