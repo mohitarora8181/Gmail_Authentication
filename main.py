@@ -63,7 +63,9 @@ def start(data:Dict):
 
     
 @app.post("/sendMail")
-async def sendMail(token:str,email:str):
+async def sendMail(token:str):
+    decoded_user = jwt.decode(token,os.getenv("JWT_SECRET"),algorithms="HS256")
+    email = decoded_user["email"]
     await send_with_template(token,email)
     return True
 
