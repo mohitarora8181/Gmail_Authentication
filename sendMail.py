@@ -83,7 +83,7 @@ async def send_with_template(token:str,email:str):
                 </div>
                 <div class="content">
                     <p>Thank you for registering with us. Please verify your email address by clicking the button below:</p>
-                    <a style={{color:"white"}} href="http://127.0.0.1:8000/verify?token={ token }" class="button">Verify Account</a>
+                    <a style={{color:"white"}} href="https://gmail-authentication.vercel.app/verify?token={ token }" class="button">Verify Account</a>
                     <p>If you did not create an account, no further action is required.</p>
                     <p>Best regards,</p>
                     <p>fiXitAI</p>
