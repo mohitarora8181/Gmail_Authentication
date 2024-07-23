@@ -39,7 +39,7 @@ def login(email:str,response:Response):
     decoded_user = jwt.decode(user["access_token"],os.getenv("JWT_SECRET"),algorithms="HS256")
     if(decoded_user["exp"] > int(round(datetime.now().timestamp()))):
         response.status_code = status.HTTP_200_OK
-        return HTTPException(status_code=status.HTTP_200_OK,detail="Successful login")
+        return HTTPException(status_code=status.HTTP_200_OK,detail={"message":"Successful login","token":user["access_token"]})
     
     response.status_code = status.HTTP_401_UNAUTHORIZED
     return HTTPException(status_code=status.HTTP_401_UNAUTHORIZED,detail="Unauthorized")
